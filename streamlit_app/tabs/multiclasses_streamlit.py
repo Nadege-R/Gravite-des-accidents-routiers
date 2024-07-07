@@ -813,7 +813,7 @@ def onglet_multiclasses():
                     probs_dnn_pytorch = dnn_pytorch_model(data_preprocessed_pytorch)[0].tolist()
                     probs_tabnet = tabnet_model.predict_proba(data_preprocessed_tabnet.to_numpy())
                     probs_xgb = xgb_model.predict_proba(data_preprocessed_xgb)
-                    #st.write(probs_xgb)
+                    #st.write(probs_dnn_pytorch)
                     
                     ###Récupération des classes attribuées par les différents modèles
                     cl_logreg = np.argmax(probs_logreg[0])
@@ -860,7 +860,7 @@ def onglet_multiclasses():
                     plt.bar(np.arange(4)+4*width, list(probs_catboost[0]), width, label="CatBoost")
                     plt.bar(np.arange(4)+5*width, list(probs_xgb[0]), width, label="XGBoost")
                     plt.bar(np.arange(4)+6*width, [probs_dnn_keras[0][0],probs_dnn_keras[0][3],probs_dnn_keras[0][2],probs_dnn_keras[0][1]], width, label="MLP-Keras")
-                    plt.bar(np.arange(4)+7*width, list(probs_dnn_pytorch), width, label="MLP-Pytorch")
+                    plt.bar(np.arange(4)+7*width, probs_dnn_pytorch, width, label="MLP-Pytorch")
                     plt.bar(np.arange(4)+8*width, list(probs_tabnet[0]), width, label="TabNet")
                     
                     plt.ylabel("Probabilité d'appartenance à la classe")
